@@ -1,0 +1,9 @@
+# Compiled object files
+*.o
+*.obj
+
+
+# Temporary files
+*.tmp
+*.temp
+*.log
