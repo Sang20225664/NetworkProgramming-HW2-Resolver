@@ -13,11 +13,11 @@ int main(int argc, char *argv[])
 
     if (isValidIPv4(input))
     {
-        printf("Valid IPv4: %s\n", input);
+        printf("Valid IPv4: %s (will resolve later)\n", input);
     }
     else
     {
-        printf("Not a valid IPv4, treat as domain: %s\n", input);
+        resolveDomain(input);
     }
 
     return 0;
