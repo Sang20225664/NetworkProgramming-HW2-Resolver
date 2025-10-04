@@ -1,11 +1,5 @@
 # HW2 - Network Programming (Resolver)
 
-## Student Info
-- Name: Your Full Name
-- Student ID: 20225664
-- Course: Network Programming - Fall 2025
-
----
 
 ## Assignment Description
 This program implements a simple **DNS Resolver** with the following features:
@@ -25,8 +19,6 @@ HW2/
 ├── Makefile # Build configuration
 └── README.md # Documentation
 
-markdown
-Copy code
 
 - `main.c`: Handle program flow and command line arguments.
 - `resolver.c`: Implement helper functions (`isValidIPv4`, `resolveDomain`, `resolveIP`).
@@ -38,7 +30,6 @@ Copy code
 ## Build Instructions
 Tested on **Ubuntu 20.04, GCC Compiler, C11 standard**.
 
-```bash
 make clean
 make
 ./resolver <parameter>
