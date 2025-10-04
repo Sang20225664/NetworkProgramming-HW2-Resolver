@@ -47,3 +47,29 @@ void resolveDomain(const char *domain)
 
     freeaddrinfo(res);
 }
+
+void resolveIP(const char *ip)
+{
+    struct in_addr addr;
+    struct hostent *he;
+    struct in_addr **addr_list;
+
+    if (inet_pton(AF_INET, ip, &addr) != 1)
+    {
+        printf("Invalid IP address format\n");
+        return;
+    }
+
+    if ((he = gethostbyaddr(&addr, sizeof(addr), AF_INET)) == NULL)
+    {
+        printf("Not found information\n");
+        return;
+    }
+
+    addr_list = (struct in_addr **)he->h_addr_list;
+
+    for (int i = 0; addr_list[i] != NULL; i++)
+    {
+        printf("%s\n", inet_ntoa(*addr_list[i]));
+    }
+}

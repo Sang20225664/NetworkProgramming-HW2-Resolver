@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     if (isValidIPv4(input))
     {
-        printf("Valid IPv4: %s (will resolve later)\n", input);
+        resolveIP(input);
     }
     else
     {
