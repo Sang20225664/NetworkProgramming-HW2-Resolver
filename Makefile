@@ -1,17 +1,23 @@
-CC=gcc
-CFLAGS=-Wall -std=c11
-TARGET=resolver
+CC = gcc
+CFLAGS = -Wall -std=c11
+
+SRC = main.c resolver.c \
+	  validation/validation.c \
+	  dns_resolution/dns_resolution.c \
+	  ip_resolution/ip_resolution.c
+
+OBJ = $(SRC:.c=.o)
+TARGET = resolver
+
+.PHONY: all clean
 
 all: $(TARGET)
 
-$(TARGET): main.o resolver.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o resolver.o
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
-main.o: main.c resolver.h
-	$(CC) $(CFLAGS) -c main.c
-
-resolver.o: resolver.c resolver.h
-	$(CC) $(CFLAGS) -c resolver.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f $(OBJ) $(TARGET)

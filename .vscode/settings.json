@@ -1,3 +1,7 @@
 {
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "dns_resolution.h": "c",
+        "ip_resolution.h": "c"
+    }
 }

@@ -9,16 +9,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    char *input = argv[1];
-
-    if (isValidIPv4(input))
-    {
-        resolveIP(input);
-    }
-    else
-    {
-        resolveDomain(input);
-    }
+    handleResolution(argv[1]);
 
     return 0;
 }
