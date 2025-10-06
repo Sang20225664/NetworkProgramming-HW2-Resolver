@@ -12,7 +12,7 @@
  * @param domain The domain name to resolve.
  * Uses getaddrinfo for resolution.
  * Use hints to specify IPv4 and TCP.
- * Use
+ * Use AI_ADDRCONFIG to avoid returning addresses that are not configured on the local system.
  * Prints all resolved IP addresses.
  */
 void resolveDomain(const char *domain)
