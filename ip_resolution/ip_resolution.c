@@ -12,39 +12,22 @@
 void resolveIP(const char *ip)
 {
     struct sockaddr_in sa;
-    char hostname[NI_MAXHOST];
+    char host[NI_MAXHOST];
+    int result;
 
-    memset(&sa, 0, sizeof(sa));
     sa.sin_family = AF_INET;
 
     if (inet_pton(AF_INET, ip, &sa.sin_addr) != 1)
     {
-        printf("Invalid IP address format\n");
+        printf("Not found information\n");
+        return;
+    }
+    result = getnameinfo((struct sockaddr *)&sa, sizeof(sa), host, sizeof(host), NULL, 0, NI_NAMEREQD);
+    if (result != 0)
+    {
+        printf("Not found information\n");
         return;
     }
 
-    // Thử resolve với các flag khác nhau
-    printf("Reverse DNS lookup for %s:\n", ip);
-
-    // Standard reverse lookup
-    if (getnameinfo((struct sockaddr *)&sa, sizeof(sa),
-                    hostname, sizeof(hostname), NULL, 0, 0) == 0)
-    {
-        printf("Hostname: %s\n", hostname);
-
-        // Verify bằng cách resolve lại hostname
-        printf("Verification (forward lookup of %s):\n", hostname);
-        resolveDomain(hostname);
-    }
-    else
-    {
-        printf("Not found information\n");
-    }
-
-    // Thử với NI_NAMEREQD flag
-    if (getnameinfo((struct sockaddr *)&sa, sizeof(sa),
-                    hostname, sizeof(hostname), NULL, 0, NI_NAMEREQD) == 0)
-    {
-        printf("Canonical name: %s\n", hostname);
-    }
+    printf("%s\n", host);
 }

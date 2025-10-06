@@ -4,5 +4,6 @@
 #include <stdbool.h>
 
 bool isValidIPv4(const char *ip);
+bool isIncompleteIPv4(const char *ip);
 
 #endif

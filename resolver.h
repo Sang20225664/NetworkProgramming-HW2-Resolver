@@ -1,11 +1,10 @@
 #ifndef RESOLVER_H
 #define RESOLVER_H
 
-#include <stdbool.h>
+#include "validation/validation.h"
+#include "dns_resolution/dns_resolution.h"
+#include "ip_resolution/ip_resolution.h"
 
-bool isValidIPv4(const char *ip);
-void resolveDomain(const char *domain); // Thêm khai báo này
-void resolveIP(const char *ip);
 void handleResolution(const char *input);
 
 #endif

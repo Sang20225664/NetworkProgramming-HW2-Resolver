@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
         printf("Usage: %s <domain-or-ip>\n", argv[0]);
         return 1;
     }
+    
 
     handleResolution(argv[1]);
 

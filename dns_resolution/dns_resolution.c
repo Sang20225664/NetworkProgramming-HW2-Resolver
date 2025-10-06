@@ -17,28 +17,24 @@
  */
 void resolveDomain(const char *domain)
 {
-    struct addrinfo hints, *res, *p;
+    struct hostent *he;
+    struct in_addr addr;
     char ipstr[INET_ADDRSTRLEN];
-    int status;
 
-    memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_INET;       // IPv4
-    hints.ai_socktype = SOCK_STREAM; // TCP
+    // gethostbyname() nghiêm ngặt hơn với input
+    he = gethostbyname(domain);
 
-    if ((status = getaddrinfo(domain, NULL, &hints, &res)) != 0)
+    if (he == NULL)
     {
         printf("Not found information\n");
         return;
     }
 
-    for (p = res; p != NULL; p = p->ai_next)
+    // Print all IP addresses
+    for (int i = 0; he->h_addr_list[i] != NULL; i++)
     {
-        struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-        void *addr = &(ipv4->sin_addr);
-
-        inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
+        addr.s_addr = *((unsigned long *)he->h_addr_list[i]);
+        inet_ntop(AF_INET, &addr, ipstr, sizeof(ipstr));
         printf("%s\n", ipstr);
     }
-
-    freeaddrinfo(res);
 }
