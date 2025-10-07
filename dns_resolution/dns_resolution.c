@@ -1,5 +1,5 @@
 #define _GNU_SOURCE
-#define _POSIX_C_SOURCE 200112L
+// #define _POSIX_C_SOURCE 200112L
 
 #include "dns_resolution.h"
 #include <stdio.h>
@@ -9,11 +9,14 @@
 
 /**
  * @brief Resolve a domain name to its IPv4 addresses.
- * @param domain The domain name to resolve.
- * Uses getaddrinfo for resolution.
- * Use hints to specify IPv4 and TCP.
- * Use AI_ADDRCONFIG to avoid returning addresses that are not configured on the local system.
- * Prints all resolved IP addresses.
+ * @param domain The domain name to resolve (e.g., "google.com")
+ * @return Prints all resolved IPv4 addresses to stdout, one per line
+ *         Prints "Not found information" if domain cannot be resolved
+ *
+ * Implementation details:
+ * - Uses gethostbyname() for DNS resolution
+ * - Iterates through all returned IP addresses
+ * - Converts binary addresses to dotted decimal notation
  */
 void resolveDomain(const char *domain)
 {
@@ -21,7 +24,6 @@ void resolveDomain(const char *domain)
     struct in_addr addr;
     char ipstr[INET_ADDRSTRLEN];
 
-    // gethostbyname() nghiêm ngặt hơn với input
     he = gethostbyname(domain);
 
     if (he == NULL)
@@ -30,7 +32,6 @@ void resolveDomain(const char *domain)
         return;
     }
 
-    // Print all IP addresses
     for (int i = 0; he->h_addr_list[i] != NULL; i++)
     {
         addr.s_addr = *((unsigned long *)he->h_addr_list[i]);

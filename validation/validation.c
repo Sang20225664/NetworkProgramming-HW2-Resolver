@@ -5,7 +5,9 @@
 #include <ctype.h>
 
 /**
- * @brief Check if a string is a valid IPv4 address.
+ * @brief Check if a string is a valid IPv4 address using inet_pton.
+ * @param ip The string to check (e.g., "192.168.1.1")
+ * @return true if valid IPv4, false otherwise
  */
 
 bool isValidIPv4(const char *ip)
@@ -14,6 +16,11 @@ bool isValidIPv4(const char *ip)
     return inet_pton(AF_INET, ip, &(sa.sin_addr));
 }
 
+/*
+ * @brief Check if a string is an incomplete IPv4 address.
+ * @param ip The string to check (e.g., "192.168.1")
+ * @return true if incomplete IPv4, false otherwise
+ */
 bool isIncompleteIPv4(const char *ip)
 {
     int dotCount = 0;
