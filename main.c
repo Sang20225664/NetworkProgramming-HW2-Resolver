@@ -2,8 +2,8 @@
 #include "resolver.h"
 
 /**
-Main function to handle command line input and call the appropriate resolution function.
-*/
+ * Main function to handle command line input and call the appropriate resolution function.
+ */
 
 int main(int argc, char *argv[])
 {

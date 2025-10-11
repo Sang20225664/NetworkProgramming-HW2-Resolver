@@ -25,6 +25,7 @@ bool isIncompleteIPv4(const char *ip)
 {
     int dotCount = 0;
     bool hasDigit = false;
+    bool hasAlpha = false;
     for (int i = 0; ip[i] != '\0'; i++)
     {
         if (ip[i] == '.')
@@ -35,6 +36,10 @@ bool isIncompleteIPv4(const char *ip)
         {
             hasDigit = true;
         }
+        else if (isalpha(ip[i]))
+        {
+            hasAlpha = true;
+        }
     }
-    return dotCount < 3 && hasDigit;
+    return dotCount < 3 && hasDigit && !hasAlpha;
 }
